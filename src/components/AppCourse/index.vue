@@ -7,12 +7,12 @@
                      size="32px"
             />
             <div class="course__info">
-                <router-link to="/about" class="course__name">
+                <router-link to="/tests" class="course__name">
                     <p>Learning</p>
                 </router-link>
                 <div class="course__category">Category В</div>
             </div>
-            <router-link to="/about">
+            <router-link to="/tests">
                 <img :src="arrowIcon"
                      alt="course read icon"
                      class="course__btn">
