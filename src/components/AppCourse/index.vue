@@ -21,66 +21,41 @@
         <div class="course__statistic">
             {{ passedQuestions.length }} questions out of {{ questions.length }} passed
         </div>
-        <div class="course__progress" ref="progress">
-            <div class="course__progress-cell"></div>
-            <div class="course__progress-cell"></div>
-            <div class="course__progress-cell"></div>
-            <div class="course__progress-cell"></div>
-            <div class="course__progress-cell"></div>
-            <div class="course__progress-cell"></div>
-            <div class="course__progress-cell"></div>
+        <div class="course__progress">
+            <div v-for="number in CELL_COUNT"
+                 :key="number"
+                 :class="`course__progress-cell
+                 ${checkCellActive() >= number ? 'course__progress-cell_active' : ''}`"
+            />
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {
-    computed,
-    onMounted,
-    ref,
-    watch,
-} from 'vue';
+import { computed } from 'vue';
+import store from '@/store';
+import { IQuestions } from '@/models';
 import AppIcon from '@/components/ui/AppIcon/index.vue';
 import capIcon from '@/assets/icons/cap.svg';
 import arrowIcon from '@/assets/icons/right.svg';
-import store from '@/store';
-import { IQuestions } from '@/models';
+
+const CELL_COUNT = 7;
+const MAX_PERCENT = 100;
+const CELL_PERCENT = MAX_PERCENT / CELL_COUNT;
 
 const questions = computed(() => store.getters.getQuestions());
 
 const passedQuestions = computed(() => {
     return questions.value.filter((item: IQuestions) => item.passed);
 });
-const progress = ref<HTMLDivElement>();
 
-const cells = computed(() => progress.value?.querySelectorAll('.course__progress-cell') || []);
 const percent = computed(() => {
-    return (passedQuestions.value.length * 100) / questions.value.length;
+    return (passedQuestions.value.length * MAX_PERCENT) / questions.value.length;
 });
 
-function markCells() {
-    const cellPercent = (100 / cells.value?.length);
-    if (!cellPercent) return;
-    const cellCount = Math.trunc(percent.value / cellPercent);
-    console.log(percent.value, cellPercent);
-    cells.value.forEach((cell: Element, idx:number) => {
-        if (idx < cellCount) {
-            cell.classList.add('course__progress-cell_active');
-        } else {
-            cell.classList.remove('course__progress-cell_active');
-        }
-    });
+function checkCellActive() {
+    return Math.trunc(percent.value / CELL_PERCENT);
 }
-
-onMounted(() => {
-    markCells();
-});
-
-watch(
-    () => percent.value,
-    () => markCells(),
-);
-
 </script>
 
 <style>

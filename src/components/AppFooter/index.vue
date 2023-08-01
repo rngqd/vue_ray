@@ -1,10 +1,13 @@
 <template>
     <div class="learning__footer footer">
-        <div class="footer__btn" v-for="btn in footerBtns" :key="btn.text">
+        <div class="footer__btn" v-for="(btn, idx) in footerBtns" :key="btn.text">
             <AppIcon
                 padding="8px"
                 size="24px"
-                :icon="btn.icon"/>
+                :icon="btn.icon"
+                :bg-color="idx === 0 ? `rgba(var(--contrast), 0.1)` :''"
+                :radius="idx === 0 ? '12px' : '0'"
+            />
             <span class="footer__text">{{ btn.text }}</span>
         </div>
     </div>
@@ -36,7 +39,6 @@ const footerBtns = [
     },
 ];
 
-const selectedRoute = footerBtns[0].text;
 </script>
 
 <style scoped>
@@ -57,7 +59,8 @@ const selectedRoute = footerBtns[0].text;
 .footer__btn {
     display: flex;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+    fill: grey;
 }
 
 .footer__text {

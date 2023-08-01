@@ -1,5 +1,6 @@
 import { Mutations } from 'vuex-smart-module';
 import { IQuestions } from '@/models';
+import { SESSION_KEY } from '@/utils/constants';
 import AppState from './state';
 
 export default class AppMutations extends Mutations<AppState> {
@@ -13,6 +14,11 @@ export default class AppMutations extends Mutations<AppState> {
                 ? { ...question, passed: !question.passed }
                 : question;
         });
+        const passed = newQuestions
+            .filter((question) => question.passed)
+                .map((questions) => questions.number);
+        console.log(passed);
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify(passed));
         this.state.questions = newQuestions;
     }
 }
