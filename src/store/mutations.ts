@@ -17,7 +17,6 @@ export default class AppMutations extends Mutations<AppState> {
         const passed = newQuestions
             .filter((question) => question.passed)
                 .map((questions) => questions.number);
-        console.log(passed);
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(passed));
         this.state.questions = newQuestions;
     }

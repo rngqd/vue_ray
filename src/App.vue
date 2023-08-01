@@ -1,9 +1,4 @@
 <template>
-    <div id="nav">
-        <router-link to="/">Home</router-link>
-        |
-        <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
 </template>
 
@@ -32,8 +27,9 @@ h1,h2,h3,h4,h5,h6,p {
 }
 
 #app {
+    margin: 0 auto;
     width: 100%;
-    height: 808px;
+    min-height: 808px;
     max-width: 360px;
     min-width: 320px;
     box-sizing: border-box;
@@ -44,28 +40,7 @@ h1,h2,h3,h4,h5,h6,p {
     font-family: Inter, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    border: 1px solid grey;
-    margin: 0 auto;
     background-color: #f8f8f8;
     color: var(--textPrimary);
-}
-
-#nav {
-    position: absolute;
-    text-align: center;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-#nav a {
-
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-    color: var(--mainPurple);
 }
 </style>

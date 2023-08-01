@@ -73,15 +73,15 @@ function changePassed(questionNumber: number) {
     width: 100%;
     margin-top: 26px;
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 15px;
 }
 .question {
-    width: 100%;
+    width: 71px;
     height: 71px;
     position: relative;
-    grid-column: span 1;
     font-size: 18px;
     line-height: 1.3;
     background-color: rgb(255, 255, 255);
